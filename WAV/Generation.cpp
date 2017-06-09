@@ -88,7 +88,8 @@ void Generation::GenerateThreeNotesTest() {
 }
 
 //Syntax: note_number[ret]note_length
-void Generation::GenerateFromFileNotes(std::string filename, std::string type) {	//type = "sine"
+// TODO: Type should be an enum
+int Generation::GenerateFromFileNotes(std::string filename, std::string type) {	//type = "sine"
 	SAMPLE* (*GenWaveform)(double, int, double);
 	for (int k = 0; k < type.length(); k++) {
 		type[k] = tolower(type[k]);
@@ -100,9 +101,10 @@ void Generation::GenerateFromFileNotes(std::string filename, std::string type) {
 	else if (type == "sine") {
 		GenWaveform = &GenerateSin;
 	}
-	else return;	//Bad input	(do something here...?)
+	else return -1;	//Bad input	(do something here...?)
 
 	std::ifstream file(filename);
+
 	std::string line;
 	std::vector<std::string> vec;
 	double length = 0;
@@ -112,6 +114,7 @@ void Generation::GenerateFromFileNotes(std::string filename, std::string type) {
 		if (line_num % 2 == 1) length += stod(line);
 		line_num++;
 	}
+	if (vec.size() == 0) return -1; // No file input
 
 	CreateWav create(filename.append(".wav").c_str(), length);
 
@@ -120,4 +123,5 @@ void Generation::GenerateFromFileNotes(std::string filename, std::string type) {
 		short* note = GenWaveform(GetFreq(stoi(*it)), 2000, note_length);
 		create.Append(note, note_length);	//total length / num notes
 	}
+	return 0;
 }

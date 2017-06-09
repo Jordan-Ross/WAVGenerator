@@ -8,7 +8,9 @@ int main() {
 	//Generation::GenerateFromFileNotes("notes");
 	//Generation::FromData();
 	//Generation::GenerateThreeNotesTest();
-	Generation::GenerateFromFileNotes("notes", "square");
 	//Generation::GenerateSinScale();
-	return 0;
+	
+
+	// Get success code from Generation for errors on file reading
+	return Generation::GenerateFromFileNotes("../Examples/notes", "square");
 }

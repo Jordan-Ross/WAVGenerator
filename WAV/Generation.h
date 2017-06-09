@@ -15,5 +15,6 @@ public:
 	static void GenerateSquareScale();
 	static void GenerateTwoNotesTest();
 	static void GenerateThreeNotesTest();
-	static void GenerateFromFileNotes(std::string filename, std::string type = "sine");
+
+	static int GenerateFromFileNotes(std::string filename, std::string type = "sine");
 };
