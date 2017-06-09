@@ -1,2 +1,2 @@
 # WAVGenerator
-Makes wav files based on note sequences
+Makes wav files of sine or square waves based on note sequences
